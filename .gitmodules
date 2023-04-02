@@ -1,0 +1,4 @@
+[submodule "cool-config"]
+	path = cool-config
+	url = https://github.com/CoolCooool/cool-config.git
+	branch = main
