@@ -10,6 +10,11 @@ jobs:
     steps:
     - name: Checkout
       uses: actions/checkout@v3
+      with:
+        token: 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
+        submodules: true
+    - name: Checkout
+      uses: actions/checkout@v3
     - name: npm install and build webpack
       run:  |
         npm install
