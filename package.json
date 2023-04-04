@@ -25,6 +25,7 @@
     "@nestjs/core": "^9.0.0",
     "@nestjs/mapped-types": "*",
     "@nestjs/platform-express": "^9.0.0",
+    "eslint-import-resolver-alias": "^1.1.2",
     "js-joda": "^1.11.0",
     "pg": "^8.10.0",
     "reflect-metadata": "^0.1.13",
