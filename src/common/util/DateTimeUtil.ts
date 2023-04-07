@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { convert, DateTimeFormatter, LocalDate, LocalDateTime, nativeJs } from 'js-joda';
 
 export class DateTimeUtil {
