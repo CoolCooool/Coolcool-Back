@@ -1,4 +1,3 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { CreateDateColumn, UpdateDateColumn } from 'typeorm';
 import { LocalDateTime } from 'js-joda';
 import { DateTimeUtil } from '@root/common/util/DateTimeUtil';

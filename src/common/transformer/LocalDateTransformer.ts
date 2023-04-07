@@ -1,6 +1,4 @@
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { LocalDate } from 'js-joda';
-// eslint-disable-next-line import/no-extraneous-dependencies
 import { ValueTransformer } from 'typeorm';
 import { DateTimeUtil } from '@root/common/util/DateTimeUtil';
 
