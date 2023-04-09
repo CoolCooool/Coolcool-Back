@@ -1,6 +1,6 @@
 import { LocalDate } from 'js-joda';
 import { ValueTransformer } from 'typeorm';
-import { DateTimeUtil } from '@root/common/util/DateTimeUtil';
+import { DateTimeUtil } from '@root/common/util/date-time.util';
 
 export class LocalDateTransformer implements ValueTransformer {
   // domain -> db로 넣을때
