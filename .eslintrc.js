@@ -15,7 +15,9 @@ module.exports = {
   ignorePatterns: ['.eslintrc.js'],
   rules: {
     'react/jsx-filename-extension': [0, {}],
-	'import/no-extraneous-dependencies': ['error', {'devDependencies': true}],
+    'import/no-extraneous-dependencies': ['error', { devDependencies: true }],
+    'no-use-before-define': 'off',
+    '@typescript-eslint/no-use-before-define': ['error'],
     '@typescript-eslint/interface-name-prefix': 'off',
     '@typescript-eslint/explicit-function-return-type': 'off',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
