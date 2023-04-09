@@ -1,9 +1,9 @@
 import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
-import { UserService } from './user.service';
 import { User } from '@root/modules/user/entity/user.entity';
 import { UserResponseDto } from '@root/modules/user/dto/user.response.dto';
 import { UserNotFoundException } from '@root/modules/user/exception/user-not-found.exception';
 import { ResponseEntity } from '@root/common/domain/response.entity';
+import { UserService } from '@root/modules/user/user.service';
 
 @Controller('users')
 export class UserController {
