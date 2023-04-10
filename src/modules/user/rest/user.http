@@ -1,0 +1,2 @@
+### User findByuserId
+GET http://localhost:6000/users/user/2

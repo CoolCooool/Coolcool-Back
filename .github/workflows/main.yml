@@ -11,12 +11,13 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v3
       with:
-        token: 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
+        token: ${{ secrets.SUBMODULE_ACCESS_TOKEN }}
         submodules: true
     - name: Checkout
       uses: actions/checkout@v3
     - name: npm install and build webpack
       run:  |
+        bash postgresql-install-linux.sh
         npm install
         npm run build
     - uses: actions/upload-artifact@master
@@ -58,4 +59,6 @@ jobs:
         run: npm run lint
 
       - name: Test
-        run: npm run test
+        run: |
+          bash postgresql-setup.sh testpass
+          npm run test
