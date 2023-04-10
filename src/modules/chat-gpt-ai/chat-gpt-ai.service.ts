@@ -9,17 +9,17 @@ export class ChatGptAiService {
 
   constructor() {
     const configuration = new Configuration({
-      organization: 'YOUR_ORGANIZATION_ID',
-      apiKey: 'YOUR_API_KEY',
+      organization: 'org-VEJFhPQbMuJcUTMF3RzrQGsZ',
+      apiKey: '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',
     });
 
     this.openAiApi = new OpenAIApi(configuration);
   }
 
-  async getModelAnswer(question: string) {
+  async getModelAnswer(query: string) {
     try {
       const params: CreateCompletionRequest = {
-        prompt: question,
+        prompt: query,
         model: DEFAULT_MODEL_ID,
         temperature: 0.9,
         max_tokens: 2048,
