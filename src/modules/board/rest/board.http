@@ -1,0 +1,47 @@
+### 게시글 등록
+POST http://localhost:6000/boards/
+Content-Type: application/json
+
+{
+  "value": "content",
+  "contents": "4월11일의 두번째 시도는 개처럼 성공했다.",
+  "likes" : 12,
+  "title": "집에 가고싶네",
+  "userId": 11,
+  "categoryId": 1,
+  "isDeleted": false
+}
+
+### 전체 게시글 조회
+GET http://localhost:6000/boards/
+Accept: application/json
+
+
+### GET 아이디별 게시글 조회, "게시글" 아이디가 1인 게시글 조회
+GET http://localhost:6000/boards/board?id=1&idType=2
+Accept: application/json
+
+### GET 아이디별 게시글 조회, "유저 아이디"가 2인 게시글 조회
+GET http://localhost:6000/boards/board?id=11&idType=1
+Accept: application/json
+
+### GET 아이디별 게시글 조회, "게시글 카테고리"가 2인 게시글 전체 조회
+GET http://localhost:6000/boards/board?id=2&idType=3
+Accept: application/json
+
+### GET 검색어별 조회, 쿼리 가지고 조회한다.
+GET http://localhost:6000/boards/search?question=개같이
+Accept: application/json
+
+### PUT 게시글 아이디를 통한 게시글 삭제. 6번 게시글 지울게요.
+PUT http://localhost:6000/boards/delete/10
+
+
+### PATCH 게시글 아이디를 통한 게시글 수정.
+PATCH http://localhost:6000/boards/7
+Content-Type: application/json
+
+{
+  "contents": "내가 이걸 이렇게 바꿨어. 이거말고 제목도 바꿀거거든?",
+  "title": "I changed title tooooooo"
+}

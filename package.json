@@ -6,7 +6,7 @@
   "private": true,
   "license": "UNLICENSED",
   "scripts": {
-	"crlf": "git config --global core.autocrlf input",
+    "crlf": "git config --global core.autocrlf input",
     "build": "nest build",
     "format": "prettier --write \"src/**/*.ts\" \"test/**/*.ts\"",
     "start": "nest start",
@@ -30,6 +30,7 @@
     "class-validator": "^0.14.0",
     "eslint-import-resolver-alias": "^1.1.2",
     "js-joda": "^1.11.0",
+    "make": "^0.8.1",
     "nest-winston": "^1.9.1",
     "pg": "^8.10.0",
     "reflect-metadata": "^0.1.13",
