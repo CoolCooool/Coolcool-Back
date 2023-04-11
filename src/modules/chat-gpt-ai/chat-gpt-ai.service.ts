@@ -1,5 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { Configuration, CreateCompletionRequest, OpenAIApi } from 'openai';
+import { CreateChatGptAiDto } from '@root/modules/chat-gpt-ai/dto/create-chat-gpt-ai.dto';
 
 const DEFAULT_MODEL_ID = 'text-davinci-003';
 
@@ -16,10 +17,10 @@ export class ChatGptAiService {
     this.openAiApi = new OpenAIApi(configuration);
   }
 
-  async getModelAnswer(query: string) {
+  async getModelAnswer(data: CreateChatGptAiDto) {
     try {
       const params: CreateCompletionRequest = {
-        prompt: query,
+        prompt: data.query,
         model: DEFAULT_MODEL_ID,
         temperature: 0.9,
         max_tokens: 2048,
