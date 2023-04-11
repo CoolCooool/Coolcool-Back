@@ -1,11 +1,12 @@
 import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { BaseTimeEntity } from '@root/common/domain/base-time.entity';
 
 @Entity()
-export class Order {
+export class Order extends BaseTimeEntity {
   // extends baseTIME entity!
   // 주문 ID
   @PrimaryGeneratedColumn()
-  orderId: number;
+  id: number;
 
   // 주문 금액
   @Column()
