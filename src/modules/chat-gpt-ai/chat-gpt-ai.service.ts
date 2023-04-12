@@ -4,6 +4,7 @@ import { CreateChatGptAiDto } from '@root/modules/chat-gpt-ai/dto/create-chat-gp
 import { InjectRepository } from '@nestjs/typeorm';
 import { ChatGPTReport } from '@root/modules/chat-gpt-ai/entities/chat-gpt-ai.entity';
 import { Repository } from 'typeorm';
+import { UpdateChatGptAiDto } from '@root/modules/chat-gpt-ai/dto/update-chat-gpt-ai.dto';
 
 const DEFAULT_MODEL_ID = 'text-davinci-003';
 
@@ -55,6 +56,28 @@ export class ChatGptAiService {
   }
 
   async softDelete(id: number) {
-    return this.ChatGPTReportRepository.update(id, { is_deleted: true });
+    await this.ChatGPTReportRepository.update(id, { is_deleted: true });
   }
+
+  // async update(id: number, updateChatGptAiDto: UpdateChatGptAiDto) {
+  //   try {
+  //     const params: CreateCompletionRequest = {
+  //       prompt: updateChatGptAiDto.query,
+  //       model: DEFAULT_MODEL_ID,
+  //       temperature: 0.9,
+  //       max_tokens: 2048,
+  //     };
+  //
+  //     // chatGPT 답변 response
+  //     const response = await this.openAiApi.createCompletion(params);
+  //
+  //     const chatGPTReport: ChatGPTReport = new ChatGPTReport();
+  //     chatGPTReport.query = updateChatGptAiDto.query;
+  //     chatGPTReport.answer = response.data.choices[0].text;
+  //
+  //     console.log(response.data);
+  //     return await this.ChatGPTReportRepository.insert(chatGPTReport);
+  //   } catch (error) {}
+  //   await this.ChatGPTReportRepository.update(id, updateChatGptAiDto);
+  // }
 }

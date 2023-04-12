@@ -35,11 +35,10 @@ Accept: application/json
 PUT http://localhost:6000/chat-gpt-ai/delete/6
 
 
-### PATCH 게시글 아이디를 통한 게시글 수정.
+### PATCH id 7 질문 수정, 답변 수정
 PATCH http://localhost:6000/chat-gpt-ai/7
 Content-Type: application/json
 
 {
-  "contents": "내가 이걸 이렇게 바꿨어. 이거말고 제목도 바꿀거거든?",
-  "title": "I changed title tooooooo"
+  "query": "오늘 뭐먹을까"
 }

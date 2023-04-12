@@ -2,6 +2,7 @@ import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Put, Q
 import { ChatGptAiService } from './chat-gpt-ai.service';
 import { ChatGPTReport } from '@root/modules/chat-gpt-ai/entities/chat-gpt-ai.entity';
 import { CreateChatGptAiDto } from '@root/modules/chat-gpt-ai/dto/create-chat-gpt-ai.dto';
+import { UpdateChatGptAiDto } from '@root/modules/chat-gpt-ai/dto/update-chat-gpt-ai.dto';
 
 @Controller('chat-gpt-ai')
 export class ChatGptAiController {
@@ -22,18 +23,14 @@ export class ChatGptAiController {
     return this.service.createModelAnswer(data);
   }
 
+  // @Patch(':id')
+  // update(@Param('id') id: number, @Body() updateChatGptAiDto: UpdateChatGptAiDto) {
+  //   console.log('I will update entity');
+  //   return this.service.update(id, updateChatGptAiDto);
+  // }
   @Put('/delete/:id')
   delete(@Param('id') id: number) {
     console.log('I will SOFT DELETE');
     return this.service.softDelete(id);
   }
-  // @Delete()
-  // remove(@Param('id') movieId: number) {
-  //   return this.service.deleteOne(movieId);
-  // }
-  //
-  // @Patch(':id')
-  // path(@Param('id') movieId: number, @Body() upateData: UpdateChatGptAiDto) {
-  //   return this.service.update(movieId, upateData);
-  // }
 }
