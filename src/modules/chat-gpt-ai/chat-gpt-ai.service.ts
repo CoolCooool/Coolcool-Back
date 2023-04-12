@@ -23,13 +23,11 @@ export class ChatGptAiService {
     this.openAiApi = new OpenAIApi(configuration);
   }
 
-  getAll() {
-    console.log(`This action returns all ChatGPTReports`);
+  async findAll() {
     return this.ChatGPTReportRepository.find();
   }
 
-  getOne(id: number) {
-    console.log(`id : {number}`);
+  async findById(id: number) {
     return this.ChatGPTReportRepository.find({ where: { user_id: id } });
   }
 

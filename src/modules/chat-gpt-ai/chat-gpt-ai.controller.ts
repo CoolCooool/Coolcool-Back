@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Patch, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Query } from '@nestjs/common';
 import { ChatGptAiService } from './chat-gpt-ai.service';
 import { ChatGPTReport } from '@root/modules/chat-gpt-ai/entities/chat-gpt-ai.entity';
 import { CreateChatGptAiDto } from '@root/modules/chat-gpt-ai/dto/create-chat-gpt-ai.dto';
@@ -8,13 +8,14 @@ export class ChatGptAiController {
   constructor(private readonly service: ChatGptAiService) {}
 
   @Get()
-  async getAll(): Promise<ChatGPTReport[]> {
-    return this.service.getAll();
+  async findAll(): Promise<ChatGPTReport[]> {
+    return this.service.findAll();
   }
-  // @Get('/user/:id')
-  // getOne(@Param('id') movieId: number){
-  //   return this.service.getOne(movieId);
-  // }
+
+  @Get('/user')
+  async findById(@Query('id', ParseIntPipe) id: number) {
+    return this.service.findById(id);
+  }
 
   @Post('/message')
   getModelAnswer(@Body() data: CreateChatGptAiDto) {
