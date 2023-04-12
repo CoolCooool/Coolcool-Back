@@ -3,31 +3,26 @@ POST http://localhost:6000/orders/order
 Content-Type: application/json
 
 {
-  "id": 1,
-  "orderAmount": "5000",
-  "orderDate": "2023-04-10",
-  "createDate": "2023-04-11",
-  "updateDate": "2023-04-12",
-  "deviceId": "1234",
-  "deliveryId": "5678",
-  "imp_uid": "9101112"
+  "order_amount": "5000",
+  "order_date": "2023-04-10",
+  "device_id": "1234",
+  "delivery_id": "5678",
+  "imp_uid": 9101112
 }
 
 ### Get all Orders
 GET http://localhost:6000/orders
 
 ### Get Order by ID
-GET http://localhost:6000/orders/order1
+GET http://localhost:6000/orders/order/3
 
 ### Update Order
-PUT http://localhost:6000/orders/order/1
+PUT http://localhost:6000/orders/order/3
 Content-Type: application/json
 
 {
-  "id": 1,
-  "name": "Updated Example Order",
-  "quantity": 10
+  "order_amount": "20000"
 }
 
 ### Delete Order
-DELETE http://localhost:6000/orders/order/1
+DELETE http://localhost:6000/orders/order/4

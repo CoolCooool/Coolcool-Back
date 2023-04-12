@@ -4,28 +4,22 @@ import { Order } from '@root/modules/orders/entity/order.entity';
 export class OrderResponseDto {
   @Exclude() private readonly _id: number;
 
-  @Exclude() private readonly _orderAmount: string;
+  @Exclude() private readonly _order_amount: string;
 
-  @Exclude() private readonly _orderDate: Date;
+  @Exclude() private readonly _order_date: Date;
 
-  @Exclude() private readonly _createDate: Date;
+  @Exclude() private readonly _device_id: string;
 
-  @Exclude() private readonly _updateDate: Date;
-
-  @Exclude() private readonly _deviceId: string;
-
-  @Exclude() private readonly _deliveryId: string;
+  @Exclude() private readonly _delivery_id: string;
 
   @Exclude() private readonly _imp_uid: number;
 
   constructor(order: Order) {
     this._id = order.id;
-    this._orderAmount = order.orderAmount;
-    this._orderDate = order.orderDate;
-    this._createDate = order.createDate;
-    this._updateDate = order.updateDate;
-    this._deviceId = order.deviceId;
-    this._deliveryId = order.deliveryId;
+    this._order_amount = order.order_amount;
+    this._order_date = order.order_date;
+    this._device_id = order.device_id;
+    this._delivery_id = order.delivery_id;
     this._imp_uid = order.imp_uid;
   }
 
@@ -36,32 +30,22 @@ export class OrderResponseDto {
 
   @Expose()
   get orderAmount(): string {
-    return this._orderAmount;
+    return this._order_amount;
   }
 
   @Expose()
   get orderDate(): Date {
-    return this._orderDate;
-  }
-
-  @Expose()
-  get createDate(): Date {
-    return this._createDate;
-  }
-
-  @Expose()
-  get updateDate(): Date {
-    return this._updateDate;
+    return this._order_date;
   }
 
   @Expose()
   get deviceId(): string {
-    return this._deviceId;
+    return this._device_id;
   }
 
   @Expose()
   get deliveryId(): string {
-    return this._deliveryId;
+    return this._delivery_id;
   }
 
   @Expose()
