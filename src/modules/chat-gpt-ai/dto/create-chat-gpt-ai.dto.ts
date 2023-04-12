@@ -7,6 +7,9 @@ export class CreateChatGptAiDto {
   @IsNumber()
   user_id: number;
 
+  @IsString()
+  answer: string;
+
   @IsBoolean()
   is_deleted: boolean;
 }

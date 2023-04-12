@@ -34,9 +34,8 @@ Accept: application/json
 ### PUT id 6 질문 답변 삭제
 PUT http://localhost:6000/chat-gpt-ai/delete/6
 
-
 ### PATCH id 7 질문 수정, 답변 수정
-PATCH http://localhost:6000/chat-gpt-ai/7
+PATCH http://localhost:6000/chat-gpt-ai/update/7
 Content-Type: application/json
 
 {

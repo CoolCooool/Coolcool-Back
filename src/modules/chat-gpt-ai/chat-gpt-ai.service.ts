@@ -59,25 +59,18 @@ export class ChatGptAiService {
     await this.ChatGPTReportRepository.update(id, { is_deleted: true });
   }
 
-  // async update(id: number, updateChatGptAiDto: UpdateChatGptAiDto) {
-  //   try {
-  //     const params: CreateCompletionRequest = {
-  //       prompt: updateChatGptAiDto.query,
-  //       model: DEFAULT_MODEL_ID,
-  //       temperature: 0.9,
-  //       max_tokens: 2048,
-  //     };
-  //
-  //     // chatGPT 답변 response
-  //     const response = await this.openAiApi.createCompletion(params);
-  //
-  //     const chatGPTReport: ChatGPTReport = new ChatGPTReport();
-  //     chatGPTReport.query = updateChatGptAiDto.query;
-  //     chatGPTReport.answer = response.data.choices[0].text;
-  //
-  //     console.log(response.data);
-  //     return await this.ChatGPTReportRepository.insert(chatGPTReport);
-  //   } catch (error) {}
-  //   await this.ChatGPTReportRepository.update(id, updateChatGptAiDto);
-  // }
+  async update(id: number, updateChatGptAiDto: UpdateChatGptAiDto) {
+    try {
+      const params: CreateCompletionRequest = {
+        prompt: updateChatGptAiDto.query,
+        model: DEFAULT_MODEL_ID,
+        temperature: 0.9,
+        max_tokens: 2048,
+      };
+      const response = await this.openAiApi.createCompletion(params);
+      updateChatGptAiDto.answer = response.data.choices[0].text;
+      console.log(response.data);
+    } catch (error) {}
+    await this.ChatGPTReportRepository.update(id, updateChatGptAiDto);
+  }
 }

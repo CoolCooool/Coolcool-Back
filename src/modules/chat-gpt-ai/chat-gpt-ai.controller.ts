@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, ParseIntPipe, Patch, Post, Put, Query } from '@nestjs/common';
+import { Body, Controller, Get, Param, ParseIntPipe, Patch, Post, Put, Query } from '@nestjs/common';
 import { ChatGptAiService } from './chat-gpt-ai.service';
 import { ChatGPTReport } from '@root/modules/chat-gpt-ai/entities/chat-gpt-ai.entity';
 import { CreateChatGptAiDto } from '@root/modules/chat-gpt-ai/dto/create-chat-gpt-ai.dto';
@@ -23,11 +23,12 @@ export class ChatGptAiController {
     return this.service.createModelAnswer(data);
   }
 
-  // @Patch(':id')
-  // update(@Param('id') id: number, @Body() updateChatGptAiDto: UpdateChatGptAiDto) {
-  //   console.log('I will update entity');
-  //   return this.service.update(id, updateChatGptAiDto);
-  // }
+  @Patch('/update/:id')
+  update(@Param('id') id: number, @Body() updateChatGptAiDto: UpdateChatGptAiDto) {
+    console.log('I will update entity');
+    return this.service.update(id, updateChatGptAiDto);
+  }
+
   @Put('/delete/:id')
   delete(@Param('id') id: number) {
     console.log('I will SOFT DELETE');
