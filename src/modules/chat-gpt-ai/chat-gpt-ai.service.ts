@@ -47,9 +47,14 @@ export class ChatGptAiService {
       chatGPTReport.query = createchatGPTAiDto.query;
       chatGPTReport.user_id = createchatGPTAiDto.user_id;
       chatGPTReport.answer = response.data.choices[0].text;
+      chatGPTReport.is_deleted = createchatGPTAiDto.is_deleted;
 
       console.log(response.data);
       return await this.ChatGPTReportRepository.insert(chatGPTReport);
     } catch (error) {}
+  }
+
+  async softDelete(id: number) {
+    return this.ChatGPTReportRepository.update(id, { is_deleted: true });
   }
 }

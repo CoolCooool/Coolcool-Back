@@ -13,4 +13,7 @@ export class ChatGPTReport extends BaseTimeEntity {
 
   @Column()
   'user_id': number;
+
+  @Column()
+  'is_deleted': boolean;
 }
