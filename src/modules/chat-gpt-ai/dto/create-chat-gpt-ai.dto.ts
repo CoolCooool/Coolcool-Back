@@ -1,6 +1,9 @@
-import { IsString } from 'class-validator';
+import { IsNumber, IsString } from 'class-validator';
 
 export class CreateChatGptAiDto {
   @IsString()
-  readonly query: string;
+  query: string;
+
+  @IsNumber()
+  user_id: number;
 }

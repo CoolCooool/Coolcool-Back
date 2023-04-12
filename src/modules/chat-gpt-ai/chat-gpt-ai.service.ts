@@ -1,6 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { Configuration, CreateCompletionRequest, OpenAIApi } from 'openai';
 import { CreateChatGptAiDto } from '@root/modules/chat-gpt-ai/dto/create-chat-gpt-ai.dto';
+import { InjectRepository } from '@nestjs/typeorm';
+import { ChatGPTReport } from '@root/modules/chat-gpt-ai/entities/chat-gpt-ai.entity';
+import { Repository } from 'typeorm';
 
 const DEFAULT_MODEL_ID = 'text-davinci-003';
 
@@ -8,7 +11,10 @@ const DEFAULT_MODEL_ID = 'text-davinci-003';
 export class ChatGptAiService {
   private readonly openAiApi: OpenAIApi;
 
-  constructor() {
+  constructor(
+    @InjectRepository(ChatGPTReport)
+    private readonly ChatGPTReportRepository: Repository<ChatGPTReport>,
+  ) {
     const configuration = new Configuration({
       organization: 'org-VEJFhPQbMuJcUTMF3RzrQGsZ',
       apiKey: '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',
@@ -17,19 +23,35 @@ export class ChatGptAiService {
     this.openAiApi = new OpenAIApi(configuration);
   }
 
-  async getModelAnswer(data: CreateChatGptAiDto) {
+  getAll() {
+    console.log(`This action returns all ChatGPTReports`);
+    return this.ChatGPTReportRepository.find();
+  }
+
+  getOne(id: number) {
+    console.log(`id : {number}`);
+    return this.ChatGPTReportRepository.find({ where: { user_id: id } });
+  }
+
+  async createModelAnswer(createchatGPTAiDto: CreateChatGptAiDto) {
     try {
       const params: CreateCompletionRequest = {
-        prompt: data.query,
+        prompt: createchatGPTAiDto.query,
         model: DEFAULT_MODEL_ID,
         temperature: 0.9,
         max_tokens: 2048,
       };
 
+      // chatGPT 답변 response
       const response = await this.openAiApi.createCompletion(params);
 
+      const chatGPTReport: ChatGPTReport = new ChatGPTReport();
+      chatGPTReport.query = createchatGPTAiDto.query;
+      chatGPTReport.user_id = createchatGPTAiDto.user_id;
+      chatGPTReport.answer = response.data.choices[0].text;
+
       console.log(response.data);
-      return response.data;
+      return await this.ChatGPTReportRepository.insert(chatGPTReport);
     } catch (error) {}
   }
 }
