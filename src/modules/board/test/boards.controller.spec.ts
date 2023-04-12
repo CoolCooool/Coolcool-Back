@@ -53,4 +53,10 @@ describe('BoardsController', () => {
       expect(boards[0].id).toBe(id);
     });
   });
+
+  describe('board search', () => {
+    test('1+1 is 2', () => {
+      expect(1 + 1).toBe(2);
+    });
+  });
 });
