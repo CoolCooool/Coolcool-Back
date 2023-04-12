@@ -23,7 +23,7 @@ describe('BoardsController', () => {
   });
 
   describe('boards', () => {
-    it('findBoardById', async () => {
+    it('findBoards', async () => {
       const id = 1;
       const board: Board = new Board();
       board.id = id;
@@ -34,6 +34,21 @@ describe('BoardsController', () => {
       controller = new BoardsController(instance(stubBoardApiService));
 
       const boards: Board[] = await controller.getBoards();
+      expect(boards).toHaveLength(id);
+      expect(boards[0].id).toBe(id);
+    });
+  });
+
+  describe('boards', () => {
+    it('findBoardById', async () => {
+      const id = 1;
+      const board: Board = new Board();
+      board.id = id;
+
+      const stubBoardApiService: BoardsService = mock(BoardsService);
+      when(stubBoardApiService.findBy(id, 1)).thenResolve([board]);
+      controller = new BoardsController(instance(stubBoardApiService));
+      const boards: Board[] = await controller.findByIdAndType(id, 1);
       expect(boards).toHaveLength(id);
       expect(boards[0].id).toBe(id);
     });

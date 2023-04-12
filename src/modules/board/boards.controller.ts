@@ -4,7 +4,12 @@ import { CreateBoardDto } from './dto/create-board.dto';
 import { UpdateBoardDto } from './dto/update-board.dto';
 import { BadRequestException, ParseIntPipe } from '@nestjs/common';
 import { ResponseEntity } from '@root/common/domain/response.entity';
-import { BoardNotCreatedException } from '@root/modules/board/exception/board-not-found.exception';
+import {
+  BoardNotCreatedException,
+  BoardNotDeletedException,
+  BoardNotFoundException,
+  BoardNotUpdatedException,
+} from '@root/modules/board/exception/board-not-found.exception';
 
 @Controller('boards')
 export class BoardsController {
@@ -20,9 +25,13 @@ export class BoardsController {
   }
 
   @Get() //return all boards
-  getBoards() {
-    console.log('get all community board\n');
-    return this.boardsService.findAll();
+  async getBoards() {
+    try {
+      console.log('get all community board\n');
+      return await this.boardsService.findAll();
+    } catch (e) {
+      throw new BoardNotFoundException();
+    }
   }
 
   @Get('/board')
@@ -31,11 +40,7 @@ export class BoardsController {
       console.log('id and type input!!\n');
       return await this.boardsService.findBy(id, idType);
     } catch (error) {
-      if (error instanceof BadRequestException) {
-        throw new BadRequestException('Invalid input queries');
-      } else {
-        throw error;
-      }
+      throw new BoardNotFoundException();
     }
   }
 
@@ -45,19 +50,27 @@ export class BoardsController {
       console.log('query for search!!\n');
       return await this.boardsService.findByQuestion(question);
     } catch (error) {
-      throw new BadRequestException('Invalid input queries');
+      throw new BoardNotFoundException();
     }
   }
 
   @Patch(':id')
-  update(@Param('id') id: number, @Body() updateBoardDto: UpdateBoardDto) {
-    console.log('I will update entity');
-    return this.boardsService.update(id, updateBoardDto);
+  async update(@Param('id') id: number, @Body() updateBoardDto: UpdateBoardDto) {
+    try {
+      console.log('I will update entity');
+      return await this.boardsService.update(id, updateBoardDto);
+    } catch (error) {
+      throw new BoardNotUpdatedException();
+    }
   }
 
   @Put('/delete/:id')
-  delete(@Param('id') id: number) {
-    console.log('I will SOFT DELETE');
-    return this.boardsService.softDelete(id);
+  async delete(@Param('id') id: number) {
+    try {
+      console.log('I will SOFT DELETE');
+      return await this.boardsService.softDelete(id);
+    } catch (error) {
+      throw new BoardNotDeletedException();
+    }
   }
 }

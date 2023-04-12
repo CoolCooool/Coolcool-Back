@@ -16,11 +16,11 @@ export class Board extends BaseTimeEntity {
   title: string; // board title
 
   @Column()
-  userId: number; // user name
+  user_id: number; // user name
 
   @Column()
-  categoryId: number; // category name (id)
+  category_id: number; // category name (id)
 
   @Column()
-  isDeleted: boolean; //
+  is_deleted: boolean; //
 }

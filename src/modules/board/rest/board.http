@@ -4,10 +4,10 @@ Content-Type: application/json
 
 {
   "value": "content",
-  "contents": "4월11일의 두번째 시도는 개처럼 성공했다.",
-  "likes" : 12,
-  "title": "집에 가고싶네",
-  "userId": 11,
+  "contents": "줜나 헷갈리네....",
+  "likes" : 15,
+  "title": "으악으악",
+  "userId": 12,
   "categoryId": 1,
   "isDeleted": false
 }
@@ -22,7 +22,7 @@ GET http://localhost:6000/boards/board?id=1&idType=2
 Accept: application/json
 
 ### GET 아이디별 게시글 조회, "유저 아이디"가 2인 게시글 조회
-GET http://localhost:6000/boards/board?id=11&idType=1
+GET http://localhost:6000/boards/board?id=12&idType=1
 Accept: application/json
 
 ### GET 아이디별 게시글 조회, "게시글 카테고리"가 2인 게시글 전체 조회

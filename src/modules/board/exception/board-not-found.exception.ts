@@ -11,3 +11,15 @@ export class BoardNotCreatedException extends HttpException {
     super('게시글 등록에 실패했습니다.', HttpStatus.NOT_FOUND);
   }
 }
+
+export class BoardNotUpdatedException extends HttpException {
+  constructor() {
+    super('게시글 수정에 실패했습니다.', HttpStatus.NOT_FOUND);
+  }
+}
+
+export class BoardNotDeletedException extends HttpException {
+  constructor() {
+    super('게시글 삭제에 실패했습니다.', HttpStatus.NOT_FOUND);
+  }
+}
