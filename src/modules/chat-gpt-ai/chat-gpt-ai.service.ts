@@ -29,7 +29,7 @@ export class ChatGptAiService {
   }
 
   async findById(id: number) {
-    return this.ChatGPTReportRepository.find({ where: { user_id: id } });
+    return this.ChatGPTReportRepository.find({ where: { userId: id } });
   }
 
   async createModelAnswer(createchatGPTAiDto: CreateChatGptAiDto) {
@@ -46,9 +46,9 @@ export class ChatGptAiService {
 
       const chatGPTReport: ChatGPTReport = new ChatGPTReport();
       chatGPTReport.query = createchatGPTAiDto.query;
-      chatGPTReport.user_id = createchatGPTAiDto.user_id;
+      chatGPTReport.userId = createchatGPTAiDto.userId;
       chatGPTReport.answer = response.data.choices[0].text;
-      chatGPTReport.is_deleted = createchatGPTAiDto.is_deleted;
+      chatGPTReport.isDeleted = createchatGPTAiDto.isDeleted;
 
       console.log(response.data);
       return await this.ChatGPTReportRepository.insert(chatGPTReport);
@@ -56,7 +56,7 @@ export class ChatGptAiService {
   }
 
   async softDelete(id: number) {
-    await this.ChatGPTReportRepository.update(id, { is_deleted: true });
+    await this.ChatGPTReportRepository.update(id, { isDeleted: true });
   }
 
   async update(id: number, updateChatGptAiDto: UpdateChatGptAiDto) {

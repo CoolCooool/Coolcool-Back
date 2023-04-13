@@ -5,11 +5,11 @@ export class CreateChatGptAiDto {
   query: string;
 
   @IsNumber()
-  user_id: number;
+  userId: number;
 
   @IsString()
   answer: string;
 
   @IsBoolean()
-  is_deleted: boolean;
+  isDeleted: boolean;
 }
