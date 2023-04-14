@@ -70,7 +70,7 @@ export class ChatGptAiService {
       const response = await this.openAiApi.createCompletion(params);
       updateChatGptAiDto.answer = response.data.choices[0].text;
       console.log(response.data);
+      await this.ChatGPTReportRepository.update(id, updateChatGptAiDto);
     } catch (error) {}
-    await this.ChatGPTReportRepository.update(id, updateChatGptAiDto);
   }
 }
