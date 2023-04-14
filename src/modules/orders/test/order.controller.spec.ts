@@ -90,19 +90,19 @@ describe('OrderController', () => {
   describe('create', () => {
     it('should create and return a new order', async () => {
       const newOrder = new CreateOrderDto();
-      newOrder.order_amount = '10000';
-      newOrder.order_date = new Date();
-      newOrder.device_id = '1234';
-      newOrder.delivery_id = '5678';
-      newOrder.imp_uid = 90101112;
+      newOrder.orderAmount = 10000;
+      newOrder.orderDate = new Date();
+      newOrder.deviceId = 1234;
+      newOrder.deliveryId = 5678;
+      newOrder.impUid = 90101112;
 
       const createdOrder = new Order();
       createdOrder.id = 1;
-      createdOrder.order_amount = newOrder.order_amount;
-      createdOrder.order_date = newOrder.order_date;
-      createdOrder.device_id = newOrder.device_id;
-      createdOrder.delivery_id = newOrder.delivery_id;
-      createdOrder.imp_uid = newOrder.imp_uid;
+      createdOrder.orderAmount = newOrder.orderAmount;
+      createdOrder.orderDate = newOrder.orderDate;
+      createdOrder.deviceId = newOrder.deviceId;
+      createdOrder.deliveryId = newOrder.deliveryId;
+      createdOrder.impUid = newOrder.impUid;
 
       const stubOrderApiService: OrderService = mock(OrderService);
       when(stubOrderApiService.create(newOrder)).thenResolve(createdOrder);

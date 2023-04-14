@@ -13,30 +13,17 @@ export class OrderController {
 
   @Get()
   async findAll() {
-    try {
-      return ResponseEntity.OK_WITH(await this.orderService.findAll());
-    } catch (e) {
-      throw new OrderNotFoundException();
-    }
+    return ResponseEntity.OK_WITH(await this.orderService.findAll());
   }
 
   @Get('/order/:id')
   async findOne(@Param('id') id: number) {
-    try {
-      return ResponseEntity.OK_WITH(new OrderResponseDto(await this.orderService.findOne(id)));
-    } catch (e) {
-      throw new OrderNotFoundException();
-    }
+    return ResponseEntity.OK_WITH(new OrderResponseDto(await this.orderService.findOne(id)));
   }
 
   @Post('/order')
   async create(@Body() order: CreateOrderDto) {
-    try {
-      return ResponseEntity.OK_WITH(this.orderService.create(order));
-    } catch (e) {
-      // 우선은 아무 에러나 던지기!
-      throw new OrderNotFoundException();
-    }
+    return ResponseEntity.OK_WITH(this.orderService.create(order));
   }
 
   @Put('/order/:id')

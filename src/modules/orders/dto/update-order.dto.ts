@@ -2,17 +2,17 @@ import { IsNumber, IsString, IsDate, IsCurrency } from 'class-validator';
 
 export class UpdateOrderDto {
   @IsCurrency()
-  order_amount: string;
+  orderAmount: number;
 
   @IsDate()
-  order_date: string;
-
-  @IsString()
-  device_id: string;
-
-  @IsString()
-  delivery_id: string;
+  orderDate: Date;
 
   @IsNumber()
-  imp_uid: number;
+  deviceId: number;
+
+  @IsNumber()
+  deliveryId: number;
+
+  @IsNumber()
+  impUid: number;
 }

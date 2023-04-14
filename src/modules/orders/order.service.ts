@@ -14,13 +14,25 @@ export class OrderService {
   ) {}
 
   async create(order: CreateOrderDto) {
-    const user = this.orderRepository.create(order);
+    const user = await this.orderRepository.create(order);
 
     return this.orderRepository.save(order);
   }
 
+  // async create(orderDto: CreateOrderDto) {
+  //   const order = new Order();
+  //   order.field1 = orderDto.field1;
+  //   order.field2 = orderDto.field2;
+  //   // 필요한 필드를 모두 복사합니다.
+  //
+  //   const createdOrder = await this.orderRepository.create(order);
+  //   const savedOrder = await this.orderRepository.save(createdOrder);
+  //   return savedOrder;
+  // }
+
   async findAll(): Promise<Order[]> {
     const orders = await this.orderRepository.find();
+
     if (!orders.length) {
       throw new OrderNotFoundException();
     }
@@ -39,6 +51,7 @@ export class OrderService {
 
   async update(id: number, order: UpdateOrderDto) {
     const updatedOrder = await this.findOne(id);
+
     if (!updatedOrder) {
       throw new OrderNotFoundException();
     }
@@ -48,6 +61,7 @@ export class OrderService {
 
   async delete(id: number) {
     const order = await this.findOne(id);
+
     if (!order) {
       throw new OrderNotFoundException();
     }

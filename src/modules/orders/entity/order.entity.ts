@@ -9,24 +9,24 @@ export class Order extends BaseTimeEntity {
 
   // 주문 금액
   @Column()
-  order_amount: string;
+  orderAmount: number;
 
   // 주문 날짜
   @Column()
-  order_date: Date;
+  orderDate: Date;
 
   // 장치
-  // @OneToOne(() => Device)
+  // @ManyToOne(() => Device)
   @Column()
-  device_id: string;
+  deviceId: number;
 
   // 배송
   // @OneToOne(() => Delivery)
   @Column()
-  delivery_id: string;
+  deliveryId: number;
 
   // 결제 ID
   // @OneToOne(() => Payment)
   @Column()
-  imp_uid: number;
+  impUid: number;
 }
