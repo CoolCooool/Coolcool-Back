@@ -30,11 +30,9 @@ describe('BoardsService', () => {
   it('should create a board', async () => {
     const createBoardDto: CreateBoardDto = {
       contents: 'Test board',
-      likes: 0,
       title: 'Test title',
       userId: 1,
       categoryId: 1,
-      isDeleted: false,
     };
 
     //console.log("!!!!! +++ repositoryMock :: " + JSON.stringify(repositoryMock, null, 2));
@@ -43,11 +41,10 @@ describe('BoardsService', () => {
 
     const board: Board = new Board();
     board.contents = createBoardDto.contents;
-    board.likes = createBoardDto.likes;
+
     board.title = createBoardDto.title;
-    board.user_id = createBoardDto.userId;
-    board.category_id = createBoardDto.categoryId;
-    board.is_deleted = createBoardDto.isDeleted;
+    board.userId = createBoardDto.userId;
+    board.categoryId = createBoardDto.categoryId;
 
     const insertResultMock: InsertResult = {
       identifiers: [],
@@ -63,4 +60,41 @@ describe('BoardsService', () => {
     //expect(result).toEqual(insertResultMock);
     expect(insertResultMock).toBeDefined();
   });
+  //
+  // it('should create a new board and return it', async () => {
+  //   // Arrange
+  //   const board: Board = new Board();
+  //
+  //   const createBoardDto: CreateBoardDto = {
+  //     contents: 'Test board contents',
+  //     likes: 0,
+  //     title: 'Test board title',
+  //     userId: 1,
+  //     categoryId: 1,
+  //     isDeleted: false,
+  //   };
+  //
+  //   // Act
+  //   const result = await service.create(createBoardDto);
+  //
+  //   expect(result).not.toBeNull(); // add this line to check for null
+  //   expect(result).toBeDefined();
+  //   expect(result).toHaveProperty('identifiers');
+  //   expect(result.identifiers).toHaveLength(1);
+  //
+  //   const stubBoardApiService: BoardsService = mock(BoardsService);
+  //   when(stubBoardApiService.findAll()).thenResolve([board]);
+  //
+  //   const boardId = result.identifiers[0].id;
+  //
+  //   const createdBoard = await repositoryMock.findOne({ where: { id: boardId } });
+  //   expect(createdBoard).toBeDefined();
+  //   expect(createdBoard.contents).toEqual(createBoardDto.contents);
+  //   expect(createdBoard.likes).toEqual(createBoardDto.likes);
+  //   expect(createdBoard.title).toEqual(createBoardDto.title);
+  //   expect(createdBoard.user_id).toEqual(createBoardDto.userId);
+  //   expect(createdBoard.category_id).toEqual(createBoardDto.categoryId);
+  //   expect(createdBoard.is_deleted).toEqual(createBoardDto.isDeleted);
+  // });
+  //
 });

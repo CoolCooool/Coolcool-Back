@@ -9,18 +9,18 @@ export class Board extends BaseTimeEntity {
   @Column({ length: 600 })
   contents: string; // board contents
 
-  @Column()
+  @Column({ default: 0 })
   likes: number; // number of likes
 
   @Column({ length: 200 })
   title: string; // board title
 
   @Column()
-  user_id: number; // user name
+  userId: number; // user name
 
   @Column()
-  category_id: number; // category name (id)
+  categoryId: number; // category name (id)
 
-  @Column()
-  is_deleted: boolean; //
+  @Column({ default: false })
+  isDeleted: boolean; //
 }

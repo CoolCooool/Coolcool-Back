@@ -4,12 +4,10 @@ Content-Type: application/json
 
 {
   "value": "content",
-  "contents": "줜나 헷갈리네....",
-  "likes" : 15,
-  "title": "으악으악",
-  "userId": 12,
-  "categoryId": 1,
-  "isDeleted": false
+  "contents": "너무 좋아 코딩이 잘돼......흐앙...앙....",
+  "title": "히히히",
+  "userId": 311,
+  "categoryId": 1
 }
 
 ### 전체 게시글 조회
@@ -22,7 +20,7 @@ GET http://localhost:6000/boards/board?id=1&idType=2
 Accept: application/json
 
 ### GET 아이디별 게시글 조회, "유저 아이디"가 2인 게시글 조회
-GET http://localhost:6000/boards/board?id=12&idType=1
+GET http://localhost:6000/boards/board?id=69696969&idType=1
 Accept: application/json
 
 ### GET 아이디별 게시글 조회, "게시글 카테고리"가 2인 게시글 전체 조회
@@ -34,14 +32,15 @@ GET http://localhost:6000/boards/search?question=개같이
 Accept: application/json
 
 ### PUT 게시글 아이디를 통한 게시글 삭제. 6번 게시글 지울게요.
-PUT http://localhost:6000/boards/delete/10
+PUT http://localhost:6000/boards/delete/38
 
 
 ### PATCH 게시글 아이디를 통한 게시글 수정.
-PATCH http://localhost:6000/boards/7
+PATCH http://localhost:6000/boards/11
 Content-Type: application/json
 
 {
-  "contents": "내가 이걸 이렇게 바꿨어. 이거말고 제목도 바꿀거거든?",
-  "title": "I changed title tooooooo"
+  "contents": "제발 되라 stub이든 mock이든 잠좀자게22",
+  "title": "업데이트 테스트를 위한 게시글 수정2",
+  "user_id": 5
 }
