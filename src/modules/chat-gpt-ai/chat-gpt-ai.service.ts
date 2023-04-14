@@ -48,7 +48,7 @@ export class ChatGptAiService {
       chatGPTReport.query = createchatGPTAiDto.query;
       chatGPTReport.userId = createchatGPTAiDto.userId;
       chatGPTReport.answer = response.data.choices[0].text;
-      chatGPTReport.isDeleted = createchatGPTAiDto.isDeleted;
+      chatGPTReport.isDeleted = false;
 
       console.log(response.data);
       return await this.ChatGPTReportRepository.insert(chatGPTReport);

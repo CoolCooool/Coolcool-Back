@@ -1,4 +1,4 @@
-import { IsBoolean, IsNumber, IsString } from 'class-validator';
+import { IsNumber, IsString } from 'class-validator';
 
 export class CreateChatGptAiDto {
   @IsString()
@@ -6,10 +6,4 @@ export class CreateChatGptAiDto {
 
   @IsNumber()
   userId: number;
-
-  @IsString()
-  answer: string;
-
-  @IsBoolean()
-  isDeleted: boolean;
 }
