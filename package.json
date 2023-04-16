@@ -30,6 +30,7 @@
     "class-validator": "^0.14.0",
     "eslint-import-resolver-alias": "^1.1.2",
     "js-joda": "^1.11.0",
+    "openai": "^3.2.1",
     "make": "^0.8.1",
     "nest-winston": "^1.9.1",
     "pg": "^8.10.0",

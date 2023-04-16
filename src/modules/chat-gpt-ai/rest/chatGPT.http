@@ -1,0 +1,40 @@
+### 챗 지피티 질문 등록 유저 1
+POST http://localhost:6000/chat-gpt-ai/message
+Content-Type: application/json
+
+{
+  "userId" : 1,
+  "query" : "한국어로 대화해줘. 내가 잠을 잘 자는지 궁금해서 수면중에 검사를 진행했어. 검사 결과로 산소포화도와 맥박이 적힌 결과를 받았어.  수면시간 7시간동안 평균 산소포화도 수치는 96%, AHI지수는 1.1, 최저 산소포화도 수치는 93를 기록했고, 맥박 이벤트는 19회 발생했어. 소견을 말해주겠니?"
+}
+
+### 챗 지피티 질문 등록 유저 2
+POST http://localhost:6000/chat-gpt-ai/message
+Content-Type: application/json
+
+{
+  "userId" : 2,
+  "query" : "아무거나 얘기해줘"
+}
+
+### 전체 챗 지피티 질문, 답변 조회
+GET http://localhost:6000/chat-gpt-ai/
+Accept: application/json
+
+### GET 유저 아이디 1 조회
+GET http://localhost:6000/chat-gpt-ai/user?id=1
+Accept: application/json
+
+### GET 유저 아이디 2 조회
+GET http://localhost:6000/chat-gpt-ai/user?id=2
+Accept: application/json
+
+### PUT id 15 질문 답변 삭제
+PUT http://localhost:6000/chat-gpt-ai/delete/15
+
+### PATCH id 16 질문 수정, 답변 수정
+PATCH http://localhost:6000/chat-gpt-ai/update/16
+Content-Type: application/json
+
+{
+  "query": "오늘 뭐먹을까"
+}
