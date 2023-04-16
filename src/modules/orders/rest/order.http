@@ -1,0 +1,29 @@
+### Create Order
+POST http://localhost:6000/orders/order
+Content-Type: application/json
+
+{
+  "orderAmount": "5000.00",
+  "orderDate": "2023-04-12T11:00:00.000Z",
+  "deviceId": 1234,
+  "deliveryId": 5678,
+  "impUid": 9101112
+}
+
+
+### Get all Orders
+GET http://localhost:6000/orders
+
+### Get Order by ID
+GET http://localhost:6000/orders/order/3
+
+### Update Order
+PUT http://localhost:6000/orders/order/3
+Content-Type: application/json
+
+{
+  "order_amount": 20000
+}
+
+### Delete Order
+DELETE http://localhost:6000/orders/order/4
