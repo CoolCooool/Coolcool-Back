@@ -1,0 +1,46 @@
+### 게시글 등록
+POST http://localhost:6000/boards/
+Content-Type: application/json
+
+{
+  "value": "content",
+  "contents": "너무 좋아 코딩이 잘돼......흐앙...앙....",
+  "title": "히히히",
+  "userId": 311,
+  "categoryId": 1
+}
+
+### 전체 게시글 조회
+GET http://localhost:6000/boards/
+Accept: application/json
+
+
+### GET 아이디별 게시글 조회, "게시글" 아이디가 1인 게시글 조회
+GET http://localhost:6000/boards/board?id=1&idType=2
+Accept: application/json
+
+### GET 아이디별 게시글 조회, "유저 아이디"가 2인 게시글 조회
+GET http://localhost:6000/boards/board?id=69696969&idType=1
+Accept: application/json
+
+### GET 아이디별 게시글 조회, "게시글 카테고리"가 2인 게시글 전체 조회
+GET http://localhost:6000/boards/board?id=2&idType=3
+Accept: application/json
+
+### GET 검색어별 조회, 쿼리 가지고 조회한다.
+GET http://localhost:6000/boards/search?question=개같이
+Accept: application/json
+
+### PUT 게시글 아이디를 통한 게시글 삭제. 6번 게시글 지울게요.
+PUT http://localhost:6000/boards/delete/38
+
+
+### PATCH 게시글 아이디를 통한 게시글 수정.
+PATCH http://localhost:6000/boards/11
+Content-Type: application/json
+
+{
+  "contents": "제발 되라 stub이든 mock이든 잠좀자게22",
+  "title": "업데이트 테스트를 위한 게시글 수정2",
+  "user_id": 5
+}
