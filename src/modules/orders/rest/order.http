@@ -3,8 +3,8 @@ POST http://localhost:6000/orders/order
 Content-Type: application/json
 
 {
-  "orderAmount": "5000.00",
-  "orderDate": "2023-04-12T11:00:00.000Z",
+  "orderAmount": 5000.01,
+  "orderDate": "2023-04-12 11:00:00",
   "deviceId": 1234,
   "deliveryId": 5678,
   "impUid": 9101112

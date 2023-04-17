@@ -1,15 +1,28 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { typeORMConfig } from '../cool-config/back/typeorm.config';
+import { AppController } from '@root/app.controller';
+import { AppService } from '@root/app.service';
+import { ConfigModule } from '@nestjs/config';
+import { PostgreSQLConfigService } from '@root/config/database/config.service';
+import { PostgreSQLConfigModule } from '@root/config/database/config.module';
 import { UserModule } from '@root/modules/user/user.module';
-import { OrderModule } from './modules/orders/orders.module';
 import { BoardsModule } from '@root/modules/board/boards.module';
-import { ChatGptAiModule } from './modules/chat-gpt-ai/chat-gpt-ai.module';
+import { OrderModule } from '@root/modules/orders/orders.module';
+import { ChatGptAiModule } from '@root/modules/chat-gpt-ai/chat-gpt-ai.module';
 
 @Module({
-  imports: [TypeOrmModule.forRoot(typeORMConfig), UserModule, BoardsModule, OrderModule, ChatGptAiModule],
+  imports: [
+    ConfigModule.forRoot({ isGlobal: true, envFilePath: './cool-config/back/.env' }),
+    TypeOrmModule.forRootAsync({
+      imports: [PostgreSQLConfigModule],
+      useClass: PostgreSQLConfigService,
+      inject: [PostgreSQLConfigService],
+    }),
+    UserModule,
+    BoardsModule,
+    OrderModule,
+    ChatGptAiModule,
+  ],
   controllers: [AppController],
   providers: [AppService],
 })
