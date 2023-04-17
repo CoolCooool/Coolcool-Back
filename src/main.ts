@@ -10,7 +10,7 @@ async function bootstrap() {
     credentials: true,
   });
   setGlobalNestApp(app);
-  await app.listen(6000);
+  await app.listen(process.env.port || 6000);
 }
 
 bootstrap();

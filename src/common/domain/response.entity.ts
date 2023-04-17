@@ -9,7 +9,7 @@ export class ResponseEntity<T> {
   @Exclude() private readonly _data: T;
 
   private constructor(status: ResponseStatus, message: string, data: T) {
-    this._statusCode = ResponseStatus[status];
+    this._statusCode = status;
     this._message = message;
     this._data = data;
   }

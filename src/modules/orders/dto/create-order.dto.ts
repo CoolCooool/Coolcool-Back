@@ -5,13 +5,13 @@ import { LocalDateTimeTransformer } from '@root/common/transformer/local-date-ti
 import { LocalDateTransformer } from '@root/common/transformer/local-date-transformer';
 
 export class CreateOrderDto {
-  @IsCurrency()
+  @IsNumber()
   orderAmount: number;
 
-  @IsDate()
+  // @IsDate()
   // @Transform(TransformDate)
   // @Type(() => Date)
-  // @Transform(LocalDateTransformer.apply)
+  // @Transform(LocalDateTransformer)
   orderDate: Date;
 
   @IsNumber()
