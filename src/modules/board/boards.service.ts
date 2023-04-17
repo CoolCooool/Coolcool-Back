@@ -5,6 +5,7 @@ import { Board } from '@root/modules/board/entity/board.entity';
 import { InjectRepository } from '@nestjs/typeorm';
 import { InsertResult, Repository } from 'typeorm';
 import { BoardNotFoundException } from '@root/modules/board/exception/board-not-found.exception';
+import { BoardType } from '@root/modules/board/entity/boardCategory.enum';
 
 @Injectable()
 export class BoardsService {
@@ -21,27 +22,36 @@ export class BoardsService {
     }
   }
 
-  async findAll(): Promise<Board[]> {
-    const boards: Board[] = await this.boardRepository.find({ where: { isDeleted: false } });
+  async findAll(query): Promise<Board[]> {
+    const boards: Board[] = await this.boardRepository.find({ where: query });
     if (boards.length === 0) {
       throw new BoardNotFoundException();
     }
-    return this.boardRepository.find({ where: { isDeleted: false } });
+    return this.boardRepository.find({ where: query });
+  }
+
+  async findByUserId(userId: number): Promise<Board[]> {
+    return this.findAll({ userId });
+  }
+
+  async findByBoardId(boardId: number): Promise<Board[]> {
+    return this.findAll({ id: boardId });
+  }
+
+  async findByCategoryId(categoryId: number): Promise<Board[]> {
+    return this.findAll({ categoryId });
   }
 
   async findBy(id: number, idType: number): Promise<Board[]> {
-    if (idType === 1) {
-      const boards: Board[] = await this.boardRepository.find({ where: { userId: id, isDeleted: false } });
-      if (boards.length === 0) {
-        throw new BoardNotFoundException();
-      }
-      return this.boardRepository.find({ where: { userId: id, isDeleted: false } });
-    } else if (idType === 2) {
-      return this.boardRepository.find({ where: { id, isDeleted: false } });
-    } else if (idType === 3) {
-      return this.boardRepository.find({ where: { categoryId: id, isDeleted: false } });
-    } else {
-      throw new Error('Invalid id type');
+    switch (idType) {
+      case BoardType.USERID._code:
+        return this.findByUserId(id);
+      case BoardType.BOARDID._code:
+        return this.findByBoardId(id);
+      case BoardType.CATEGORYID._code:
+        return this.findByCategoryId(id);
+      default:
+        throw new Error('Invalid id type');
     }
   }
 
@@ -49,7 +59,6 @@ export class BoardsService {
     const boards: Board[] = await this.boardRepository
       .createQueryBuilder('board')
       .where('board.contents LIKE :keyword', { keyword: `%${question}%` })
-      .andWhere('board.isDeleted = :isDeleted', { isDeleted: false })
       .getMany();
     if (boards.length === 0) {
       throw new BoardNotFoundException();
@@ -58,7 +67,7 @@ export class BoardsService {
   }
 
   async update(id: number, updateBoardDto: UpdateBoardDto) {
-    const board = await this.boardRepository.findOne({ where: { id, isDeleted: false } });
+    const board = await this.boardRepository.findOne({ where: { id } });
     if (!board) {
       throw new NotFoundException(`Board with ID ${id} not found`);
     }
@@ -67,11 +76,18 @@ export class BoardsService {
   }
 
   async softDelete(id: number) {
-    const board = await this.boardRepository.findOne({ where: { id, isDeleted: false } });
+    const board = await this.boardRepository.findOne({ where: { id } });
     if (!board) {
       throw new NotFoundException(`Board with ID ${id} not found`);
     }
-    const updateData: UpdateBoardDto = { isDeleted: true };
-    return this.update(id, updateData);
+    await this.boardRepository.softDelete(id);
+  }
+
+  async restore(id: number) {
+    return this.boardRepository.createQueryBuilder('board').restore().where('id = :id', { id: id }).execute();
+  }
+
+  async hardDelete(id: number) {
+    return this.boardRepository.delete(id);
   }
 }

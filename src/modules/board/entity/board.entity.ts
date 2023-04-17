@@ -1,4 +1,4 @@
-import { Column, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, DeleteDateColumn, Entity, PrimaryGeneratedColumn } from 'typeorm';
 import { BaseTimeEntity } from '@root/common/domain/base-time.entity';
 
 @Entity('board')
@@ -21,6 +21,6 @@ export class Board extends BaseTimeEntity {
   @Column()
   categoryId: number; // category name (id)
 
-  @Column({ default: false })
-  isDeleted: boolean; //
+  @DeleteDateColumn()
+  deletedAt: Date;
 }

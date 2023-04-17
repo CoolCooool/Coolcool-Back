@@ -16,7 +16,7 @@ export class BoardsController {
 
   @Get() //return all boards
   async getBoards() {
-    return ResponseEntity.OK_WITH(await this.boardsService.findAll());
+    return ResponseEntity.OK_WITH(await this.boardsService.findAll({}));
   }
 
   @Get('/board')
@@ -37,5 +37,15 @@ export class BoardsController {
   @Put('/delete/:id')
   async delete(@Param('id') id: number) {
     return ResponseEntity.OK_WITH(await this.boardsService.softDelete(id));
+  }
+
+  @Put('/restore/:id')
+  async restore(@Param('id') id: number) {
+    return ResponseEntity.OK_WITH(await this.boardsService.restore(id));
+  }
+
+  @Delete('/delete/:id')
+  async hardDelete(@Param('id') id: number) {
+    return ResponseEntity.OK_WITH(await this.boardsService.hardDelete(id));
   }
 }

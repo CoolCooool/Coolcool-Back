@@ -29,7 +29,7 @@ describe('BoardsService', () => {
       board.id = id;
 
       const stubBoardApiService: BoardsService = mock(BoardsService);
-      when(stubBoardApiService.findAll()).thenResolve([board]);
+      when(stubBoardApiService.findAll({})).thenResolve([board]);
 
       controller = new BoardsController(instance(stubBoardApiService));
 
