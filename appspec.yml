@@ -1,0 +1,18 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /home/ubuntu/coolback
+    overwrite: true
+permissions:
+  - object: /home/ubuntu/coolback/
+    owner: ubuntu
+    group: ubuntu
+
+hooks:
+  AfterInstall:
+    - location: scripts/CD_build.sh
+      runas: ubuntu
+  ApplicationStart:
+    - location: scripts/CD_start_server.sh
+      runas: ubuntu
