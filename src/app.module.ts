@@ -12,7 +12,10 @@ import { ChatGptAiModule } from '@root/modules/chat-gpt-ai/chat-gpt-ai.module';
 
 @Module({
   imports: [
-    ConfigModule.forRoot({ isGlobal: true, envFilePath: './cool-config/back/.env' }),
+    ConfigModule.forRoot({
+      isGlobal: true,
+      envFilePath: process.env.NODE_ENV === 'dev' ? './cool-config/back/.env.dev' : './cool-config/back/.env.local',
+    }),
     TypeOrmModule.forRootAsync({
       imports: [PostgreSQLConfigModule],
       useClass: PostgreSQLConfigService,
