@@ -2,8 +2,9 @@ import { Controller, Get, Post, Body, Patch, Param, Delete, Query, Put, NotFound
 import { BoardsService } from './boards.service';
 import { CreateBoardDto } from './dto/create-board.dto';
 import { UpdateBoardDto } from './dto/update-board.dto';
-import { BadRequestException, ParseIntPipe } from '@nestjs/common';
+import { ParseIntPipe } from '@nestjs/common';
 import { ResponseEntity } from '@root/common/domain/response.entity';
+import { CreateReplyDto } from '@root/modules/reply/dto/create-reply.dto';
 
 @Controller('boards')
 export class BoardsController {
@@ -16,7 +17,7 @@ export class BoardsController {
 
   @Get() //return all boards
   async getBoards() {
-    return ResponseEntity.OK_WITH(await this.boardsService.findAll({}));
+    return ResponseEntity.OK_WITH(await this.boardsService.findAll());
   }
 
   @Get('/board')
@@ -27,7 +28,7 @@ export class BoardsController {
   @Get('search')
   async findBySearches(@Query('question') question: string) {
     return ResponseEntity.OK_WITH(await this.boardsService.findByQuestion(question));
-  }
+  } //ㅁㅔ서드 명 바꿔보기
 
   @Patch(':id')
   async update(@Param('id') id: number, @Body() updateBoardDto: UpdateBoardDto) {
@@ -47,5 +48,10 @@ export class BoardsController {
   @Delete('/delete/:id')
   async hardDelete(@Param('id') id: number) {
     return ResponseEntity.OK_WITH(await this.boardsService.hardDelete(id));
+  }
+
+  @Patch('/reply/:id')
+  async updateReply(@Body() createReplyDto: CreateReplyDto) {
+    return this.boardsService.updateReply(createReplyDto);
   }
 }

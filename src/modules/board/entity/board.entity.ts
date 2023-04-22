@@ -1,5 +1,6 @@
-import { Column, DeleteDateColumn, Entity, PrimaryGeneratedColumn } from 'typeorm';
+import { Column, DeleteDateColumn, Entity, OneToMany, PrimaryGeneratedColumn } from 'typeorm';
 import { BaseTimeEntity } from '@root/common/domain/base-time.entity';
+import { Reply } from '@root/modules/reply/entity/reply.entity';
 
 @Entity('board')
 export class Board extends BaseTimeEntity {
@@ -23,4 +24,7 @@ export class Board extends BaseTimeEntity {
 
   @DeleteDateColumn()
   deletedAt: Date;
+
+  @OneToMany(() => Reply, (reply) => reply.board)
+  replies: Reply[];
 }

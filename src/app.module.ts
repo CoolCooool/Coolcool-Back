@@ -9,6 +9,7 @@ import { UserModule } from '@root/modules/user/user.module';
 import { BoardsModule } from '@root/modules/board/boards.module';
 import { OrderModule } from '@root/modules/orders/orders.module';
 import { ChatGptAiModule } from '@root/modules/chat-gpt-ai/chat-gpt-ai.module';
+import { ReplyModule } from '@root/modules/reply/reply.module';
 
 @Module({
   imports: [
@@ -22,6 +23,7 @@ import { ChatGptAiModule } from '@root/modules/chat-gpt-ai/chat-gpt-ai.module';
     BoardsModule,
     OrderModule,
     ChatGptAiModule,
+    ReplyModule,
   ],
   controllers: [AppController],
   providers: [AppService],

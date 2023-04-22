@@ -1,0 +1,22 @@
+### 댓글 등록
+POST http://localhost:6000/replies/
+Content-Type: application/json
+
+{
+  "content": "안녕. 정파에요 소통해요",
+  "userId": 6969,
+  "boardId": 54
+}
+
+### 전체 댓글 조회
+GET http://localhost:6000/replies/
+Accept: application/json
+
+
+### GET 아이디별 댓글 조회
+GET http://localhost:6000/replies/13
+Accept: application/json
+
+### DELETE 아이디별 댓글 삭제
+DELETE http://localhost:6000/replies/13
+

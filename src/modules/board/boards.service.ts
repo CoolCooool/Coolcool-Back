@@ -6,12 +6,17 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { InsertResult, Repository } from 'typeorm';
 import { BoardNotFoundException } from '@root/modules/board/exception/board-not-found.exception';
 import { BoardType } from '@root/modules/board/entity/boardCategory.enum';
+import { CreateReplyDto } from '@root/modules/reply/dto/create-reply.dto';
+import { Reply } from '@root/modules/reply/entity/reply.entity';
 
 @Injectable()
 export class BoardsService {
-  constructor(@InjectRepository(Board) private boardRepository: Repository<Board>) {
-    this.boardRepository = boardRepository;
-  }
+  constructor(
+    @InjectRepository(Board)
+    private boardRepository: Repository<Board>,
+    @InjectRepository(Reply)
+    private replyRepository: Repository<Reply>,
+  ) {}
 
   async create(createBoardDto: CreateBoardDto): Promise<InsertResult> {
     const board: Board = this.boardRepository.create(createBoardDto);
@@ -22,27 +27,30 @@ export class BoardsService {
     }
   }
 
-  async findAll(query): Promise<Board[]> {
-    const boards: Board[] = await this.boardRepository.find({ where: query });
+  async findAll(query?): Promise<Board[]> {
+    const boards: Board[] = await this.boardRepository.find(query && { where: query });
     if (boards.length === 0) {
       throw new BoardNotFoundException();
     }
-    return this.boardRepository.find({ where: query });
+    return boards;
   }
 
   async findByUserId(userId: number): Promise<Board[]> {
     return this.findAll({ userId });
   }
 
-  async findByBoardId(boardId: number): Promise<Board[]> {
-    return this.findAll({ id: boardId });
+  async findByBoardId(boardId: number): Promise<Board> {
+    return this.boardRepository.findOne({
+      where: { id: boardId },
+      relations: ['replies'],
+    });
   }
 
   async findByCategoryId(categoryId: number): Promise<Board[]> {
     return this.findAll({ categoryId });
   }
 
-  async findBy(id: number, idType: number): Promise<Board[]> {
+  async findBy(id: number, idType: number) {
     switch (idType) {
       case BoardType.USERID._code:
         return this.findByUserId(id);
@@ -89,5 +97,15 @@ export class BoardsService {
 
   async hardDelete(id: number) {
     return this.boardRepository.delete(id);
+  }
+
+  async updateReply(reply: CreateReplyDto) {
+    const board = await this.findBy(reply.boardId, 2);
+    const newReply = new Reply();
+    newReply.board = board[0];
+    newReply.content = reply.content;
+    newReply.userId = reply.userId;
+    await this.replyRepository.save(newReply);
+    return board;
   }
 }
